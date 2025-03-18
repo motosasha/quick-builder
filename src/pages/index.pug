@@ -1,0 +1,14 @@
+extends ../layouts/layout__default.pug
+
+block variables
+  -
+    isMainPage = true
+    pageTitle = "Main page"
+
+block content
+  .container
+    h1#title.page__title.title!= pageTitle
+    p.page__p mode: #[strong!= process.env.NODE_ENV]
+    p.page__p from pages json: #[strong!= variable]
+    p.page__p from data json: #[strong.something!= myVariable]
+    p.page__p from data config: #[strong!= projectName]

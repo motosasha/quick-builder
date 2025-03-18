@@ -1,0 +1,12 @@
+@use "@styles/base/breakpoints";
+@use "@styles/mixins/typography";
+
+.footer {
+  $block-name: &; // #{$block-name}__element
+
+  border-top: 1px solid var(--border-primary);
+
+  &__inner {
+    padding: 16px 0;
+  }
+}

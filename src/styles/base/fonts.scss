@@ -1,0 +1,4 @@
+@use "@styles/mixins/font-face";
+@include font-face.ff("Inter", "Inter-Regular");
+@include font-face.ff("Inter", "Inter-Medium", 500);
+@include font-face.ff("Inter", "Inter-Bold", 700);

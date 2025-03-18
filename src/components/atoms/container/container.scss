@@ -1,0 +1,9 @@
+@use "@styles/base/breakpoints";
+@use "@styles/mixins/typography";
+
+.container {
+  $block-name: &; // #{$block-name}__element
+
+  width: min(calc(100vw - var(--container-padding) * 2), var(--container-max-width));
+  margin: 0 auto;
+}

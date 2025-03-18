@@ -1,0 +1,16 @@
+{
+  "projectNavigation": {
+    "section": [
+      {
+        "title": "Страницы проекта",
+        "pages": [
+          {
+            "title": "Main page",
+            "description": "главная страница",
+            "href": "index"
+          }
+        ]
+      }
+    ]
+  }
+}

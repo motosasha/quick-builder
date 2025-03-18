@@ -1,0 +1,21 @@
+{
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "css.validate": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editorconfig.generateAuto": false,
+  "html.format.extraLiners": "body",
+  "html.format.indentInnerHtml": true,
+  "less.validate": false,
+  "prettier.experimentalTernaries": true,
+  "prettier.trailingComma": "all",
+  "prettier.requireConfig": true,
+  "puglint.enable": true,
+  "scss.validate": false,
+  "stylelint.enable": true,
+  "stylelint.customSyntax": "postcss-scss",
+  "stylelint.validate": ["css", "scss"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": "explicit"
+  }
+}

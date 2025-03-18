@@ -1,0 +1,26 @@
+//- Все примеси в этом файле должны начинаться c имени блока (header)
+//- Упоминание имени блока в классах обязательно, без этого он не попадёт
+//- в сборку
+
+mixin header(mods, data)
+
+  //- Принимает:
+  //-   mods    {string} - список модификаторов
+  //-   data    {object} - объект с данными
+  //- Вызов:
+        +header("some-mod", {})
+
+  //- список модификаторов
+  -
+    var allMods = "";
+    if (typeof (mods) !== "undefined" && mods) {
+      var modsList = mods.split(",");
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods + " header--" + modsList[i].trim();
+      }
+    }
+
+  .header(class=allMods)&attributes(attributes)
+    .header__inner
+      .container header
+      block

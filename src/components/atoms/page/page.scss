@@ -1,0 +1,77 @@
+@use "@styles/base/breakpoints";
+@use "@styles/mixins/typography";
+
+.page {
+  $block-name: &; // #{$block-name}__element
+
+  min-width: 320px;
+  height: 100%;
+  min-height: 100%;
+
+  font-size: var(--font-size-root);
+  font-family: sans-serif;
+  line-height: normal;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-font-smoothing: inherit;
+  -webkit-tap-highlight-color: rgb(var(--color-black) 0);
+  -webkit-text-size-adjust: 100%; // stylelint-disable-line
+  scroll-behavior: smooth;
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: calc(var(--vh, 1vh) * 100);
+    margin: 0;
+
+    color: var(--body-color);
+    font-weight: var(--font-weight-base);
+    font-size: var(--font-size-base);
+    font-family: var(--font-base), sans-serif;
+    line-height: var(--line-height-base);
+
+    background-color: var(--body-bg);
+  }
+
+  &__header {
+    flex: 0 0 auto;
+  }
+
+  &__main {
+    flex: 1 0 auto;
+    padding: 32px 0;
+  }
+
+  &__footer {
+    flex: 0 0 auto;
+  }
+
+  &__noscript {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    left: 8px;
+    z-index: var(--lib-z-index-noscript);
+
+    padding: 24px;
+
+    text-align: center;
+
+    background-color: var(--back-primary);
+
+    border: 1px solid var(--border-error);
+    border-radius: 8px;
+  }
+
+  &__title {
+    @include typography.h1;
+
+    margin: 0 0 24px;
+  }
+
+  &__p {
+    @include typography.body;
+
+    margin: 0;
+  }
+}

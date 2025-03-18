@@ -1,0 +1,12 @@
+@use "@styles/base/breakpoints";
+@use "@styles/mixins/typography";
+
+.header {
+  $block-name: &; // #{$block-name}__element
+
+  border-bottom: 1px solid var(--border-primary);
+
+  &__inner {
+    padding: 16px 0;
+  }
+}
