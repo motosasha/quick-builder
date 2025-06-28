@@ -1,3 +1,10 @@
+![Coding assistance for Node.js](https://ideomotor.me/banner.jpg)
+
+---
+[Документация](https://ideomotor.me/quick-builder/) |
+[Быстрый старт](https://ideomotor.me/quick-builder/guide/quick-start.html)
+---
+
 # QuickBuilder
 
 **QuickBuilder** — это гибкий и конфигурируемый сборщик для многостраничных проектов вёрстки, основанный на [Vite](https://vite.dev/) и [Vituum](https://vituum.dev/). Он использует компонентный (блочный) подход и методологию [БЭМ](https://ru.bem.info/).
