@@ -14,7 +14,6 @@ import { viteStaticCopy } from "vite-plugin-static-copy";
 // plugins
 import writePugMixinsFile from "./plugins/vite-plugin-pug-mixins.js";
 import vitePugLint from "./plugins/vite-plugin-pug-lint.js";
-import hashGenerator from "./plugins/vite-plugin-hash-generator";
 import replaceSvgHtml from "./plugins/vite-plugin-svg-replace";
 import writeServiceFiles from "./plugins/vite-plugin-service-files.js";
 
@@ -96,7 +95,6 @@ export default defineConfig({
     vitePluginSvgSpriteMap(createSpriteIconsList(), svgSpriteOptions),
 
     // buildEnd
-    hashGenerator(),
     beautify(prettyOption),
 
     // closeBundle

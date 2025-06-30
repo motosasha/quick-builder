@@ -1,33 +1,52 @@
 import { projectConfig } from "../project.config.js";
 
-import fs from "node:fs";
+import fs from "node:fs/promises";
 import path from "node:path";
-
-import hashes from "../src/service/hashes.json";
 
 const { svgFileName } = projectConfig;
 
 export default function replaceHtmlPlugin(options) {
   const { dir, replacements } = options;
+  let resolvedConfig;
 
   return {
     name: "vite-plugin-svg-replace",
     apply: "build",
 
-    closeBundle() {
-      const htmlFiles = fs.readdirSync(dir).filter((file) => file.endsWith(".html"));
+    configResolved(config) {
+      resolvedConfig = config;
+    },
 
-      htmlFiles.forEach((file) => {
-        const filePath = path.join(dir, file);
-        let htmlContent = fs.readFileSync(filePath, "utf-8");
+    async closeBundle() {
+      const manifestPath = path.join(resolvedConfig.build.outDir, ".vite", "manifest.json");
 
-        for (let [searchValue, replaceValue] of Object.entries(replacements)) {
-          replaceValue += `.${hashes[`${svgFileName}.svg`]}.svg`;
-          htmlContent = htmlContent.replace(new RegExp(searchValue, "g"), replaceValue.toString());
+      try {
+        const svgSpriteFileName = `${svgFileName}.svg`;
+        const manifest = JSON.parse(await fs.readFile(manifestPath, "utf-8"));
+        const svgSpriteEntry = manifest[svgSpriteFileName];
+
+        if (svgSpriteEntry && svgSpriteEntry.file) {
+          const hashedFileName = svgSpriteEntry.file;
+          const htmlFiles = (await fs.readdir(dir)).filter((file) => file.endsWith(".html"));
+
+          htmlFiles.forEach((file) => {
+            const filePath = path.join(dir, file);
+            let htmlContent = fs.readFile(filePath, "utf-8");
+
+            htmlContent.then((content) => {
+              for (let [searchValue] of Object.entries(replacements)) {
+                content = content.replace(new RegExp(searchValue, "g"), hashedFileName);
+              }
+
+              fs.writeFile(filePath, content, "utf-8");
+            });
+          });
+        } else {
+          console.warn(`[Manifest Read] Запись для ${svgSpriteEntry} не найдена в manifest.json.`);
         }
-
-        fs.writeFileSync(filePath, htmlContent, "utf-8");
-      });
+      } catch (error) {
+        console.error("[SVG Replace] Ошибка при чтении manifest.json:", error);
+      }
     },
   };
 }
