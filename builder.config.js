@@ -25,9 +25,6 @@ const fromObj = {
   get icons() {
     return `${this.source}/icons`;
   },
-  get service() {
-    return `${this.source}/service`;
-  },
 };
 const htmlPathObj = {
   root: assetsDir,

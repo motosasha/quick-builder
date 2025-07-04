@@ -1,8 +1,8 @@
 export const projectConfig = {
   projectName: "/quick-builder/",
 
-  assetsDir: "" || "assets",
   outputDir: "build",
+  assetsDir: "" || "assets",
 
   // style imports layers
   styleLayers: ["reset", "base", "atoms", "molecules", "edging", "organisms", "overrides"],
@@ -33,18 +33,13 @@ export const projectConfig = {
   alwaysAddBlocks: {},
   // ignored blocks
   ignoredBlocks: ["no-js", "content-filler"],
-  // autoprefixer option
-  autoprefixerOption: { flexbox: false, grid: false },
-  // pxToRem options
-  pxToRemOptions: {
-    rootValue: 16,
-    unitPrecision: 5,
-    propList: ["font", "font-size", "line-height", "letter-spacing"],
-    selectorBlackList: [],
-    replace: true,
-    mediaQuery: false,
-    minPixelValue: 0,
-  },
+
+  // pxToRem properties
+  pxToRemRootValue: 16,
+  pxToRemUnitPrecision: 5,
+  pxToRemPropList: ["font", "font-size", "line-height", "letter-spacing"],
+  pxToRemSelectorBlackList: [],
+
   // strategy
   strategy: "mobile-first", // ["mobile-first", "desktop-first"]
 
@@ -76,6 +71,8 @@ export const projectConfig = {
   removeSvgAttr: ["symbol:width", "symbol:height"], // ["stroke-width"]
   svgAlias: "_svgSprite_",
   svgFileName: "svgSprite",
+  svgSpriteView: true,
+  svgSpriteUse: true,
 
   // navigation
   includeProjectNav: true,
