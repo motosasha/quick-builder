@@ -24,49 +24,49 @@
       --sky-400: hsl(198 93% 60%);
       --sky-600: hsl(200 98% 39%);
       --sky-700: hsl(201 96% 32%);
+    }
 
-      @media (prefers-color-scheme: light) {
-        & {
-          --main-bg-color: var(--chrome-100);
-          --main-border-color: var(--chrome-200);
+    @media (prefers-color-scheme: light) {
+      & {
+        --main-bg-color: var(--chrome-100);
+        --main-border-color: var(--chrome-200);
 
-          --section-title-color: var(--chrome-400);
-          --section-title-border-color: var(--sky-400);
-          --section-title-border-top-color: var(--chrome-200);
+        --section-title-color: var(--chrome-400);
+        --section-title-border-color: var(--sky-400);
+        --section-title-border-top-color: var(--chrome-200);
 
-          --link-title-color: var(--sky-700);
-          --link-description-color: var(--chrome-500);
-          --link-description-color-hover: var(--chrome-700);
-          --link-bg-hover: var(--chrome-200);
+        --link-title-color: var(--sky-700);
+        --link-description-color: var(--chrome-500);
+        --link-description-color-hover: var(--chrome-700);
+        --link-bg-hover: var(--chrome-200);
 
-          --button-bg-color: var(--sky-200);
-          --button-title-color: var(--sky-700);
+        --button-bg-color: var(--sky-200);
+        --button-title-color: var(--sky-700);
 
-          --icon-stroke-color: var(--link-description-color);
-          --icon-stroke-color-hover: var(--chrome-700);
-        }
+        --icon-stroke-color: var(--link-description-color);
+        --icon-stroke-color-hover: var(--chrome-700);
       }
+    }
 
-      @media (prefers-color-scheme: dark) {
-        & {
-          --main-bg-color: var(--chrome-900);
-          --main-border-color: var(--chrome-800);
+    @media (prefers-color-scheme: dark) {
+      & {
+        --main-bg-color: var(--chrome-900);
+        --main-border-color: var(--chrome-800);
 
-          --section-title-color: var(--chrome-600);
-          --section-title-border-color: var(--sky-700);
-          --section-title-border-top-color: var(--chrome-800);
+        --section-title-color: var(--chrome-600);
+        --section-title-border-color: var(--sky-700);
+        --section-title-border-top-color: var(--chrome-800);
 
-          --link-title-color: var(--sky-400);
-          --link-description-color: var(--chrome-500);
-          --link-description-color-hover: var(--chrome-300);
-          --link-bg-hover: var(--chrome-800);
+        --link-title-color: var(--sky-400);
+        --link-description-color: var(--chrome-500);
+        --link-description-color-hover: var(--chrome-300);
+        --link-bg-hover: var(--chrome-800);
 
-          --button-bg-color: var(--sky-600);
-          --button-title-color: var(--sky-200);
+        --button-bg-color: var(--sky-600);
+        --button-title-color: var(--sky-200);
 
-          --icon-stroke-color: var(--link-description-color);
-          --icon-stroke-color-hover: var(--chrome-100);
-        }
+        --icon-stroke-color: var(--link-description-color);
+        --icon-stroke-color-hover: var(--chrome-100);
       }
     }
 
@@ -146,6 +146,12 @@
       background-color: var(--link-bg-hover);
     }
 
+    .project-nav__link[data-project-link-active] {
+      background-color: var(--link-bg-hover);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
     .project-nav__link + .project-nav__link {
       display: flex;
       justify-content: center;
@@ -218,12 +224,16 @@
           li.project-nav__list-title!= section.title
         each page in section.pages
           li.project-nav__list-item
-            a.project-nav__link(href!= page.href + ".html")
+            -
+              var href = ""
+              if (page.href.endsWith("/")) href = page.href
+              else href = "/" + page.href + ".html"
+            a.project-nav__link(href!= href)
               .project-nav__title!= page.title
               if page.description
                 .project-nav__descr!= page.description
-            a.project-nav__link(href!= page.href + ".html", target="_blank", title="Open in new tab")
-              svg(width="16", height="16", viewBox="0 0 16 16", fill="none", xmlns="http://www.w3.org/2000/svg")
+            a.project-nav__link(href!= href, target="_blank", title="Open in new tab")
+              svg(width="16", height="16", viewBox="0 0 16 16", xmlns="http://www.w3.org/2000/svg")
                 path(d="M12.6667 6.00001V3.33334H10", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
                 path(d="M8.66666 7.33334L12.6667 3.33334", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
                 path(d="M13.3333 8.66666V9.99999C13.3333 11.8409 11.8409 13.3333 9.99999 13.3333H5.99999C4.15904 13.3333 2.66666 11.8409 2.66666 9.99999V5.99999C2.66666 4.15904 4.15904 2.66666 5.99999 2.66666H7.33332", stroke="currentColor", stroke-width="1.5", stroke-linecap="round", stroke-linejoin="round")
@@ -233,6 +243,12 @@
   script.
     const projectNav = document.querySelector(".project-nav");
     const projectNavButton = projectNav.querySelector(".project-nav__trigger");
+    const projectLinks = projectNav.querySelectorAll(".project-nav__link");
+    const url = new URL(window.location.href);
+
+    projectLinks.forEach((link) => {
+      if (link.href === url.href) link.setAttribute("data-project-link-active", "")
+    });
 
     document.body.addEventListener("click", (e) => {
       if (e.target === projectNavButton) {

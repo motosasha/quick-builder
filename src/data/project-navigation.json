@@ -7,7 +7,7 @@
           {
             "title": "Main page",
             "description": "главная страница",
-            "href": "index"
+            "href": "/"
           }
         ]
       }

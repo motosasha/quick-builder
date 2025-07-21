@@ -16,6 +16,7 @@
   -webkit-tap-highlight-color: rgb(var(--color-black) 0);
   -webkit-text-size-adjust: 100%; // stylelint-disable-line
   scroll-behavior: smooth;
+  color-scheme: light dark;
 
   &__body {
     display: flex;
