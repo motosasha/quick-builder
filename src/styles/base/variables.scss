@@ -3,6 +3,8 @@
 @use "sass:color";
 
 :root {
+  color-scheme: light dark;
+
   // color primitives
   --color-black: hsl(0deg 0% 0%);
   --color-white: hsl(0deg 0% 100%);
@@ -87,5 +89,20 @@
     --back-secondary: var(--neutral-800);
 
     --border-primary: var(--neutral-700);
+  }
+
+  @supports (color: light-dark(white, black)) {
+    body {
+      --front-primary: light-dark(var(--neutral-900), var(--neutral-100));
+      --front-secondary: light-dark(var(--neutral-700), var(--neutral-300));
+      --front-tertiary: light-dark(var(--neutral-500), var(--neutral-500));
+      --front-invert: light-dark(var(--neutral-100), var(--neutral-900));
+      --front-accent: light-dark(var(--emerald-500), var(--emerald-500));
+
+      --back-primary: light-dark(var(--neutral-100), var(--neutral-900));
+      --back-secondary: light-dark(var(--neutral-200), var(--neutral-800));
+
+      --border-primary: light-dark(var(--neutral-300), var(--neutral-700));
+    }
   }
 }
