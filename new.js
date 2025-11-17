@@ -80,7 +80,7 @@ mixin ${blockName}(mods, data)
     .${blockName}__inner
       block
 `;
-    } else if (extension === "img" || extension === "symbol") {
+    } else if (extension === "img" || extension === "symbols") {
       const folder = `${blockPath}${extension}/`;
       if (existsSync(folder) === false) {
         mkdirSync(folder);
@@ -90,7 +90,7 @@ mixin ${blockName}(mods, data)
       }
     }
 
-    if (existsSync(path.resolve(filePath)) === false && extension !== "img" && extension !== "symbol") {
+    if (existsSync(path.resolve(filePath)) === false && extension !== "img" && extension !== "symbols") {
       writeFile(filePath, fileContent, (err) => {
         if (err) {
           return console.log(`[MSG] Файл НЕ создан: ${err}`);
@@ -100,7 +100,7 @@ mixin ${blockName}(mods, data)
           console.warn(fileCreateMsg);
         }
       });
-    } else if (extension !== "img" && extension !== "symbol") {
+    } else if (extension !== "img" && extension !== "symbols") {
       console.log(`[MSG] Файл НЕ создан: ${filePath} (уже существует)`);
     } else if (extension === "md") {
       writeFile(`${blockPath}readme.md`, fileContent, (err) => {
