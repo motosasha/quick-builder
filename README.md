@@ -1,4 +1,4 @@
-![Coding assistance for Node.js](https://ideomotor.me/banner.jpg)
+![Quick builder cover](https://ideomotor.me/banner.jpg)
 
 ---
 [Документация](https://ideomotor.me/quick-builder/) |
